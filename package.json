@@ -1,6 +1,6 @@
 {
   "name": "mofron-comp-ttlframe",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "title frame component for mofron",
   "main": "index.js",
   "scripts": {
@@ -9,6 +9,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/simpart/mofron-comp-ttlframe.git"
+  },
+  "dependencies": {
+     "mofron-comp-txtheader" : ""
   },
   "keywords": [
     "front-end"

@@ -64,6 +64,13 @@ mf.comp.TtlFrame = class extends Frame {
         }
     }
     
+    title (prm, dct) {
+        try { return this.text(prm, dct); } catch (e) {
+            console.error(e.stack);
+            throw e;
+        }
+    }
+    
     mainColor (prm) {
         try { return this.header().baseColor(prm); } catch (e) {
             console.error(e.stack);

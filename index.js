@@ -1,21 +1,21 @@
 /**
- * @file   mofron-comp-{@comp-name}/index.js
+ * @file mofron-comp-ttlframe/index.js
+ * @brief title frame component
  * @author simpart
  */
 const mf     = require('mofron');
 const Frame  = require('mofron-comp-frame');
 const Header = require('mofron-comp-txtheader');
 
-/**
- * @class mofron.comp.TtlFrame
- * @brief titile frame component for mofron
- */
 mf.comp.TtlFrame = class extends Frame {
-    
     /**
      * initialize component
      * 
-     * @param po paramter or option
+     * @param (mixed) text paramter
+     *                object: component option
+     * @param (component) child parameter
+     * @pmap text,child
+     * @type private
      */
     constructor (po, p2) {
         try {
@@ -32,7 +32,7 @@ mf.comp.TtlFrame = class extends Frame {
     /**
      * initialize dom contents
      * 
-     * @param prm : 
+     * @type private 
      */
     initDomConts () {
         try {
@@ -44,35 +44,69 @@ mf.comp.TtlFrame = class extends Frame {
         }
     }
     
+    /**
+     * header component
+     * 
+     * @param (mofron-comp-txtheader) header component
+     * @return (mofron-comp-txtheader) header component
+     * @type parameter
+     */
     header (prm) {
         try {
-            let ret = this.innerComp('header', prm, Header);
-            if (undefined !== prm) {
-                prm.execOption({ bind : false });
-            }
-            return ret;
+	    if (undefined !== prm) {
+	        prm.option({ bind : false });
+	    }
+            return this.innerComp('header', prm, Header);
         } catch (e) {
             console.error(e.stack);
             throw e;
         }
     }
     
-    text (prm, dct) {
-        try { return this.header().text(prm, dct); } catch (e) {
+    /**
+     * title text contents
+     * 
+     * @param (mixed) string: title text
+     *                mofron-comp-text: text component
+     * @param (string (size)) margin left size
+     * @return (mofron-comp-text) text component
+     * @type parameter
+     */
+    text (prm, lft) {
+        try { return this.header().text(prm, lft); } catch (e) {
             console.error(e.stack);
             throw e;
         }
     }
     
-    title (prm, dct) {
-        try { return this.text(prm, dct); } catch (e) {
+    /**
+     * title text contents
+     * same as text parameter
+     * 
+     * @param (mixed) string: title text
+     *                mofron-comp-text: text component
+     * @param (string (size)) margin left size
+     * @return (mofron-comp-text) text component
+     * @type parameter
+     */
+    title (prm, lft) {
+        try { return this.text(prm, lft); } catch (e) {
             console.error(e.stack);
             throw e;
         }
     }
     
-    mainColor (prm) {
-        try { return this.header().baseColor(prm); } catch (e) {
+    /**
+     * header background color
+     * 
+     * @param (mixed (color)) string: color name, #hex
+     *                        array: [red, green, blue, (alpha)]
+     * @param (option) style option
+     * @return (string) header background color
+     * @type parameter
+     */
+    mainColor (prm, opt) {
+        try { return this.header().baseColor(prm,opt); } catch (e) {
             console.error(e.stack);
             throw e;
         }

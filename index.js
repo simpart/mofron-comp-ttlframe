@@ -3,11 +3,10 @@
  * @brief title frame component
  * @author simpart
  */
-const mf     = require('mofron');
 const Frame  = require('mofron-comp-frame');
 const Header = require('mofron-comp-txtheader');
 
-mf.comp.TtlFrame = class extends Frame {
+module.exports = class extends Frame {
     /**
      * initialize component
      * 
@@ -17,12 +16,15 @@ mf.comp.TtlFrame = class extends Frame {
      * @pmap text,child
      * @type private
      */
-    constructor (po, p2) {
+    constructor (p1, p2) {
         try {
             super();
             this.name('TtlFrame');
-            this.prmMap(['text', 'child']);
-            this.prmOpt(po, p2);
+            this.shortForm('text','child');
+            
+	    if (0 < arguments.length) {
+                this.config(p1, p2);
+            }
         } catch (e) {
             console.error(e.stack);
             throw e;
@@ -37,7 +39,8 @@ mf.comp.TtlFrame = class extends Frame {
     initDomConts () {
         try {
             super.initDomConts();
-            this.addChild(this.header());
+	    this.header(new Header());
+            this.child(this.header());
         } catch (e) {
             console.error(e.stack);
             throw e;
@@ -54,9 +57,9 @@ mf.comp.TtlFrame = class extends Frame {
     header (prm) {
         try {
 	    if (undefined !== prm) {
-	        prm.option({ bind : false });
+	        prm.config({ bind : false });
 	    }
-            return this.innerComp('header', prm, Header);
+            return this.innerComp('header', prm);
         } catch (e) {
             console.error(e.stack);
             throw e;
@@ -68,12 +71,14 @@ mf.comp.TtlFrame = class extends Frame {
      * 
      * @param (mixed) string: title text
      *                mofron-comp-text: text component
-     * @param (string (size)) margin left size
+     * @param (dict) text config
      * @return (mofron-comp-text) text component
      * @type parameter
      */
-    text (prm, lft) {
-        try { return this.header().text(prm, lft); } catch (e) {
+    text (prm, cnf) {
+        try {
+	    return this.header().text(prm, cnf);
+	} catch (e) {
             console.error(e.stack);
             throw e;
         }
@@ -90,7 +95,9 @@ mf.comp.TtlFrame = class extends Frame {
      * @type parameter
      */
     title (prm, lft) {
-        try { return this.text(prm, lft); } catch (e) {
+        try {
+	    return this.text(prm, { style: { "margin-left" : lft } });
+	} catch (e) {
             console.error(e.stack);
             throw e;
         }
@@ -106,11 +113,12 @@ mf.comp.TtlFrame = class extends Frame {
      * @type parameter
      */
     mainColor (prm, opt) {
-        try { return this.header().baseColor(prm,opt); } catch (e) {
+        try {
+	    return this.header().baseColor(prm,opt);
+	} catch (e) {
             console.error(e.stack);
             throw e;
         }
     }
 }
-module.exports = mofron.comp.TtlFrame;
 /* end of file */

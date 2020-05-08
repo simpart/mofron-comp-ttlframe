@@ -11,12 +11,12 @@ npm install mofron mofron-comp-ttlframe
 
 # Parameter
 
-|Simple<br>Param | Parameter Name | Type | Description |
-|:--------------:|:---------------|:-----|:------------|
-| | header | mofron-comp-txtheader | header component |
-|◯| text | mixed | string: title text |
+| Short<br>Form | Parameter Name | Type | Description |
+|:-------------:|:---------------|:-----|:------------|
+| | initDomConts | ||| | header | mofron-comp-txtheader | header component |
+| | text | mixed | string: title text |
 | | | | mofron-comp-text: text component |
-| | | string (size) | margin left size |
+| | | dict | text config |
 | | title | mixed | string: title text |
 | | | | mofron-comp-text: text component |
 | | | string (size) | margin left size |

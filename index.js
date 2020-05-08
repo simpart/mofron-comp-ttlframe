@@ -38,8 +38,8 @@ module.exports = class extends Frame {
      */
     initDomConts () {
         try {
+	    this.header(new Header({ height: "0.4rem" }));
             super.initDomConts();
-	    this.header(new Header());
             this.child(this.header());
         } catch (e) {
             console.error(e.stack);
